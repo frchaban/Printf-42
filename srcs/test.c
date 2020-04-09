@@ -15,7 +15,7 @@
 int main(void)
 {
    	
-	ft_printf("%s\n", "Hello World");
-	printf("%s\n", "Hello World");
+	ft_printf("%-10.5s\n", "Hello World");
+	printf("%-10.5s\n", "Hello World");
      return (0);
 }

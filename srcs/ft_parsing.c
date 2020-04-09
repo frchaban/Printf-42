@@ -36,7 +36,6 @@ t_format	*ft_parsing(const char *fmt)
 	pos = 0;
 	while (++i <= (int)ft_count(fmt))
 	{
-		
 		w = 0;
 		p = 0;
 		f[i].before = NULL;
