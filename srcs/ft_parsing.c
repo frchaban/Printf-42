@@ -56,10 +56,13 @@ t_format	*ft_parsing(const char *fmt)
 			f[i].width = (ft_substr(fmt, pos, w));
 		if (fmt[pos + w] == '.' && fmt[pos + w])
 		{
-			while (ft_isdigit(fmt[++pos + w + p]) && fmt[pos + w + p])
+			pos++;
+			while (ft_isdigit(fmt[pos + w + p]) && fmt[pos + w + p])
 				p++;
 			if (p != 0)
-				f[i].precision = ft_substr(fmt, pos + w - p, p + 1);
+				f[i].precision = ft_substr(fmt, pos + w, p);
+			else
+				f[i].precision = ft_strdup("0");
 		}	
 		if (ft_isconv(fmt[pos + w + p]) && fmt[pos + w + p])
 			f[i].conv = fmt[pos + w + p];
