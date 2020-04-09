@@ -27,6 +27,7 @@ int				ft_isconv(char c);
 int				ft_isflag(char c);
 int				ft_printf(const char *format, ...);
 
+
 typedef	struct 	s_format
 {
 	char		*before;
@@ -34,6 +35,9 @@ typedef	struct 	s_format
 	char		*width;
 	char		*precision;
 	char		conv;
+	char		*result;
 }				t_format;
 t_format		*ft_parsing(const char *fmt);
+char    		*ft_display_str(t_format f, const char *str);
+char    *ft_display_int(t_format f, int arg);
 #endif

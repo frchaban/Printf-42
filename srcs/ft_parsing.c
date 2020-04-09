@@ -30,16 +30,22 @@ t_format	*ft_parsing(const char *fmt)
 	int				i;
 	unsigned int	pos;
 
-	if (!(f = (t_format *)malloc(sizeof(*f) * ft_count(fmt))))
+	if (!(f = (t_format *)malloc(sizeof(*f) * (ft_count(fmt) + 1))))
 		return (NULL);
 	i = -1;
 	pos = 0;
 	while (++i <= (int)ft_count(fmt))
 	{
+		
 		w = 0;
 		p = 0;
+		f[i].before = NULL;
+		f[i].width = NULL;
+		f[i].precision = NULL;
 		f[i].before = ft_before(fmt, pos);
-		pos = pos + ft_strlen(f[i].before) + 1; 
+		pos = pos + ft_strlen(f[i].before) + 1;
+		if (pos >= ft_strlen(fmt))
+			break; 
 		if (fmt[pos] && fmt[pos] == '0')
 			f[i].flag = fmt[pos++];
 		if (fmt[pos] == '-' && fmt[pos])

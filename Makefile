@@ -14,7 +14,7 @@ NAME = libftprintf.a
 
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -g -fsanitize=address -Wall -Wextra -Werror
 
 SRCS = srcs/*.c
 

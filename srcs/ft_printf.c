@@ -15,36 +15,41 @@
 int	ft_printf(const char *format, ...)
 {
 	va_list	ap;
-	 int i;
+	int i;
 	t_format	*f;
+	int	result;
 
 	f = ft_parsing(format);
 	va_start(ap, format);
 	i = -1;
-	while (++i < (int)ft_count(format))
+	while (++i <= (int)ft_count(format))
 	{	
-		/*ft_putstr(f[i].before);
-		if (f[i].conv == 'd' || f[i].conv == 'i' || f[i].conv == 'u')
-			ft_putnbr(va_arg(ap, int));
-		else if (f[i].conv == 'x' || f[i].conv == 'X')
-			ft_putnbr_hex_US(va_arg(ap, int), f[i].conv =='x' ? 1 : 2);
-		else if (f[i].conv == 'c')
-			ft_putchar(va_arg(ap, int));
+		f[i].result = NULL;
+		if (f[i].conv == 'd' || f[i].conv == 'i' || f[i].conv == 'u'
+		||f[i].conv == 'X' || f[i].conv == 'X' || f[i].conv == 'c'
+		|| f[i].conv == 'p')
+			f[i].result = ft_display_int(f[i], va_arg(ap, int));
 		else if (f[i].conv == 's')
-			ft_putstr(va_arg(ap, char *));
-		else if (f[i].conv == 'p')
-			ft_putnbr_hex_US((long)va_arg(ap, unsigned int), 1);
+			f[i].result = ft_display_str(f[i], va_arg(ap, char *));
 		else if (f[i].conv == '%')
-			ft_putchar('%');
-			*/
-		printf("before: %s\n" ,f[i].before);
-		printf("flag: %c\n" ,f[i].flag);
-		printf("width: %s\n" ,f[i].width);
-		printf("precision: %s\n" ,f[i].precision);
-		printf("conv: %c\n" ,f[i].conv);
+			f[i].result = ft_strdup("%");
 	}
-	printf("before: %s\n" ,f[i].before);
 	va_end(ap);
-	return (0);
+	i = -1;
+	result = 0;
+	while (++i <= (int)ft_count(format))
+	{
+		if (f[i].before)
+		{
+			ft_putstr(f[i].before);
+			result += ft_strlen(f[i].before);
+		}
+		if (f[i].result)
+		{
+			ft_putstr(f[i].result);
+			result += ft_strlen(f[i].result);
+		}
+	}
+	return (result);
 }
 
