@@ -23,19 +23,8 @@ unsigned int ft_count(const char *format)
 	{
 		if (format[i] == '%')
 		{
-			if (ft_isflag(format[i + 1]))
-			{
-				if (ft_isconv(format[i + 2]))
-				{
-					i = i + 2;
-					count++;
-				}
-			}
-			else if (ft_isconv(format[i + 1]))
-			{
-				i++;
-				count++;
-			}
+			count++;
+			i++;
 		}
 		i++;
 	}

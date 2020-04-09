@@ -16,7 +16,7 @@ int main(void)
 {
    	// ft_printf("char= %c\nstring= %s\nint= %d\nint 2= %i\nhex min= %x\nhex maj= %X\nbullshit= %%\nunsigned int= %u\n", 'A', "salut", 150, 10, 30, 30, 150);
    	 //printf("char= %c\nstring= %s\nint= %d\nint 2= %i\nhex min= %x\nhex maj= %X\nbullshit= %%\nunsigned int= %u\n", 'A', "salut", 150, 10, 30, 30, 150);
-	ft_printf("salut%0-53.12ctoi%acoucou%6s", "salut");
+	ft_printf("salut%0-53.12ctoi%acoucou%6.234s", "salut");
 	//printf("salut%0-53.12ctoi%acoucou%6s");
      return (0);
 }

@@ -29,12 +29,11 @@ int				ft_printf(const char *format, ...);
 
 typedef	struct 	s_format
 {
+	char		*before;
 	char		flag;
 	char		*width;
 	char		*precision;
 	char		conv;
-	int			offset;
 }				t_format;
-t_format    ft_initialize(t_format f);
-t_format		ft_parsing(const char *format, unsigned int pos, t_format f);
+t_format		*ft_parsing(const char *fmt);
 #endif
