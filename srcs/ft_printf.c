@@ -26,9 +26,10 @@ int	ft_printf(const char *format, ...)
 	{	
 		f[i].result = NULL;
 		if (f[i].conv == 'd' || f[i].conv == 'i'||f[i].conv == 'x'
-		|| f[i].conv == 'X' || f[i].conv == 'c' || f[i].conv == 'p'
-		|| f[i].conv == 'u')
+		|| f[i].conv == 'X' || f[i].conv == 'c'|| f[i].conv == 'u')
 			f[i].result = ft_display_int(f[i], va_arg(ap, int));
+		else if (f[i].conv == 'p')
+			f[i].result = ft_display_mem(f[i], (long)va_arg(ap, void *));
 		else if (f[i].conv == 's')
 			f[i].result = ft_display_str(f[i], va_arg(ap, char *));
 		else if (f[i].conv == '%')

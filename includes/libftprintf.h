@@ -40,4 +40,5 @@ typedef	struct 	s_format
 t_format		*ft_parsing(const char *fmt);
 char    		*ft_display_str(t_format f, const char *str);
 char    	*ft_display_int(t_format f, int arg);
+char    *ft_display_mem(t_format f, long arg);
 #endif

@@ -90,6 +90,8 @@ char    *ft_display_d_i(t_format f, char *str)
     char   *result;
     char    *offset;
 
+    if (f.conv == 'p')
+        str = ft_strjoin("0x", str);
     if (f.precision && ft_atoi(f.precision) == 0)  
         if (ft_strcmp(str, "0") == 0 || ft_strcmp(str, "-0") == 0)
             return (result = ft_strdup(""));
@@ -104,6 +106,10 @@ char    *ft_display_d_i(t_format f, char *str)
     return(result);
 }
 
+char    *ft_display_mem(t_format f, long arg)
+{
+    return(ft_display_d_i(f, ft_lhex(arg, 'x')));
+}
 
 char    *ft_display_int(t_format f, int arg)
 {
