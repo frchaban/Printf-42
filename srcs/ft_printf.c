@@ -25,7 +25,7 @@ int	ft_printf(const char *format, ...)
 	while (++i <= (int)ft_count(format))
 	{	
 		f[i].result = NULL;
-		if (f[i].conv == 'd' || f[i].conv == 'i'||f[i].conv == 'X'
+		if (f[i].conv == 'd' || f[i].conv == 'i'||f[i].conv == 'x'
 		|| f[i].conv == 'X' || f[i].conv == 'c' || f[i].conv == 'p'
 		|| f[i].conv == 'u')
 			f[i].result = ft_display_int(f[i], va_arg(ap, int));

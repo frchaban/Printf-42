@@ -95,7 +95,7 @@ char    *ft_display_d_i(t_format f, char *str)
             return (result = ft_strdup(""));
     result = ft_length(f.precision, str);
     if (!f.precision && f.flag == '0')
-        result = ft_length(ft_itoa(ft_atoi(f.width) - 1), result);
+        result = ft_length(ft_itoa(ft_atoi(f.width)), result);
     else if  ((offset = ft_offset(f.width, result)))
     {
         result = (f.flag == '-' ? ft_strjoin(result, offset) : ft_strjoin(offset, result));
@@ -104,10 +104,6 @@ char    *ft_display_d_i(t_format f, char *str)
     return(result);
 }
 
-char    *ft_display_hex(t_format f, char *str)
-{
-    
-}
 
 char    *ft_display_int(t_format f, int arg)
 {
@@ -118,7 +114,7 @@ char    *ft_display_int(t_format f, int arg)
     else if (f.conv == 'u')
         return (ft_display_d_i(f, ft_itoa_us(arg + 1 + 4294967295)));
     else if (f.conv == 'x' || f.conv == 'X')
-        return (ft_display_hex(f, ft_itoa_us(arg + 1 + 4294967295)));
+        return (ft_display_d_i(f, ft_uhex(arg + 1 + 4294967295, f.conv)));
     return (NULL);
 }
 
