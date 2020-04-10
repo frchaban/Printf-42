@@ -14,29 +14,35 @@ NAME = libftprintf.a
 
 CC = gcc
 
-FLAGS = -g -fsanitize=address -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror
 
-SRCS = srcs/*.c
+PATH_SRCS = ./srcs/
 
-INCLUDES = -Iincludes
+OBJS = $(SRCS:.c=.o)
 
+SRCS:= $(filter-out ft_lst%.c, $(wildcard srcs/*.c))
 
-all : lib $(NAME)
+INCLUDES = -I./includes
 
-lib :
-			@make -C libft/ all 
+all:	lib $(NAME)
 
-$(NAME) :	
-			@$(CC) $(SRCS)  $(FLAGS) $(INCLUDES) libft/libft.a
+lib:
+	@make -C libft/ all 
 
-test :	
-			@$(CC) $(SRCS) $(INCLUDES) libft/libft.a
-clean :
-			rm -f *.o
+$(NAME): $(OBJS)
+	ar rcs $(NAME) $^
 
-fclean : clean
+$(OBJS) : $(HEADERS)
+
+%.o: %.c
+	$(CC) $(FLAGS) -c $< $(INCLUDES) -o $@ 
+
+clean:
+			rm -f $(OBJS)
+
+fclean: clean
 			rm -f  $(NAME)
 
-re : fclean all
+re: fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re bonus lib
