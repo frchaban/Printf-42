@@ -12,20 +12,33 @@
 
 #include "libftprintf.h"
 
-char		*ft_before(const char *fmt, unsigned int pos)
+t_format	ft_format_parsing(const char *fmt, unsigned int pos)
 {
-	unsigned int	i;
+	t_format	f;
 
-	i = 0;
-	while (fmt[pos + i] && fmt[pos + i] != '%')
-		i++;
-	return (ft_substr(fmt,pos,i));
+	f.before = ft_format_before(fmt, pos);
+	pos = pos + ft_strlen(f.before) + 1;
+	if (pos >= ft_strlen(fmt))
+		return (f); 
+	f = ft_format_flag(f, fmt, pos);
+	pos = pos + f.offsetflag;
+	f.width = ft_format_width(fmt, pos);
+	pos = pos + ft_strlen(f.width);
+	if (fmt[pos] == '.' && fmt[pos])
+	{
+		f.precision = ft_format_precision(fmt, ++pos);
+		if (f.precision)
+			pos = pos + ft_strlen(f.precision);
+	}
+	else
+		f.precision = NULL;
+	if (ft_isconv(fmt[pos]) && fmt[pos])
+		f.conv = fmt[pos];
+	return (f);
 }
 
 t_format	*ft_parsing(const char *fmt)
 {
-	unsigned int	w;
-	unsigned int	p;
 	t_format		*f;
 	int				i;
 	unsigned int	pos;
@@ -36,36 +49,17 @@ t_format	*ft_parsing(const char *fmt)
 	pos = 0;
 	while (++i <= (int)ft_count(fmt))
 	{
-		w = 0;
-		p = 0;
-		f[i].before = NULL;
-		f[i].width = NULL;
-		f[i].precision = NULL;
-		f[i].before = ft_before(fmt, pos);
-		pos = pos + ft_strlen(f[i].before) + 1;
-		if (pos >= ft_strlen(fmt))
-			break; 
-		if (fmt[pos] && fmt[pos] == '0')
-			f[i].flag = fmt[pos++];
-		if (fmt[pos] == '-' && fmt[pos])
-			f[i].flag = fmt[pos++];
-		while (ft_isdigit(fmt[pos + w]) && fmt[pos + w])
-			w++;
-		if (w != 0)
-			f[i].width = (ft_substr(fmt, pos, w));
-		if (fmt[pos + w] == '.' && fmt[pos + w])
+		f[i] = ft_format_parsing(fmt, pos);
+		pos += ft_strlen(f[i].before);
+		pos += 1; /* pour le % */
+		pos += f[i].offsetflag;
+		pos += ft_strlen(f[i].width);
+		if (fmt[pos] == '.' && fmt[pos])
 		{
-			pos++;
-			while (ft_isdigit(fmt[pos + w + p]) && fmt[pos + w + p])
-				p++;
-			if (p != 0)
-				f[i].precision = ft_substr(fmt, pos + w, p);
-			else
-				f[i].precision = ft_strdup("0");
-		}	
-		if (ft_isconv(fmt[pos + w + p]) && fmt[pos + w + p])
-			f[i].conv = fmt[pos + w + p];
-		pos = pos + w + p + 1;
+			pos += 1; /* pour le . */
+			pos += (f[i].precision ? ft_strlen(f[i].precision) : 0);
+		}
+		pos += 1; /* pour le conv */
 	}
 	return (f);
 }

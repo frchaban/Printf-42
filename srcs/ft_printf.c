@@ -12,33 +12,34 @@
 
 #include "libftprintf.h"
 
-int	ft_printf(const char *format, ...)
+t_format	ft_format_result(va_list ap, t_format f)
 {
-	va_list	ap;
-	int i;
-	t_format	*f;
-	int	result;
+	f.result = NULL;
+	if (f.width && ft_strcmp(f.width, "*") == 0)
+		f.width = ft_itoa(va_arg(ap, int));
+	if (f.precision && ft_strcmp(f.precision, "*") == 0)
+		f.precision = ft_itoa(va_arg(ap, int));	
+	if (f.conv == 'd' || f.conv == 'i'||f.conv == 'x'
+	|| f.conv == 'X' || f.conv == 'c'|| f.conv == 'u')
+		f.result = ft_display_int(f, va_arg(ap, int));
+	else if (f.conv == 'p')
+		f.result = ft_display_mem(f, (long)va_arg(ap, void *));
+	else if (f.conv == 's')
+		f.result = ft_display_str(f, va_arg(ap, char *));
+	else if (f.conv == '%')
+		f.result = ft_display_char(f, '%');
+	return (f);
+}
 
-	f = ft_parsing(format);
-	va_start(ap, format);
-	i = -1;
-	while (++i <= (int)ft_count(format))
-	{	
-		f[i].result = NULL;
-		if (f[i].conv == 'd' || f[i].conv == 'i'||f[i].conv == 'x'
-		|| f[i].conv == 'X' || f[i].conv == 'c'|| f[i].conv == 'u')
-			f[i].result = ft_display_int(f[i], va_arg(ap, int));
-		else if (f[i].conv == 'p')
-			f[i].result = ft_display_mem(f[i], (long)va_arg(ap, void *));
-		else if (f[i].conv == 's')
-			f[i].result = ft_display_str(f[i], va_arg(ap, char *));
-		else if (f[i].conv == '%')
-			f[i].result = ft_strdup("%");
-	}
-	va_end(ap);
+int	ft_print_result(t_format *f, int size)
+{
+	int	result;
+	int i;
+
 	i = -1;
 	result = 0;
-	while (++i <= (int)ft_count(format))
+	f[size].result = NULL; 
+	while (++i <= size)
 	{
 		if (f[i].before)
 		{
@@ -51,6 +52,48 @@ int	ft_printf(const char *format, ...)
 			result += ft_strlen(f[i].result);
 		}
 	}
+	return (result);
+}
+
+void	ft_format_free(t_format *f, unsigned int size)
+{
+	unsigned int i;
+
+	i = 0;
+	while (i < size)
+	{
+		if (f[i].before)
+			free(f[i].before);
+		if (f[i].width)
+			free(f[i].width);
+		if (f[i].precision)
+			free(f[i].precision);
+		if (f[i].result)
+			free(f[i].result);
+		i++;
+	}
+	free(f[i].before);
+	free(f[i].result);
+	if (f)
+		free (f);
+}
+
+int	ft_printf(const char *format, ...)
+{
+	va_list	ap;
+	int i;
+	t_format	*f;
+	int	result;
+
+	f = ft_parsing(format);
+	va_start(ap, format);
+	i = -1;
+	while (++i < (int)ft_count(format))
+		f[i] = ft_format_result(ap, f[i]);
+	va_end(ap);
+	result = ft_print_result(f, (int)ft_count(format));
+	ft_format_free(f, ft_count(format));
+	//getchar();
 	return (result);
 }
 

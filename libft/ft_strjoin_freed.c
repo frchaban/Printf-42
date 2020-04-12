@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_strjoin_freed.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frchaban <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/19 16:28:49 by frchaban          #+#    #+#             */
-/*   Updated: 2020/03/31 21:09:37 by frchaban         ###   ########.fr       */
+/*   Created: 2020/04/12 14:00:38 by frchaban          #+#    #+#             */
+/*   Updated: 2020/04/12 14:00:41 by frchaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft.h"
 
-int main(void)
+char	*ft_strjoin_freed(char *s1, char *s2)
 {
-	//char	str[5]="salut";
+	int	i;
+	int	j;
+	char			*s;
 
-	//ft_printf("%-10.5s\n", "Hello World");
-	//printf("%-10.5s\n", "Hello World");
-	//ft_printf("salut%-10c\ncoucou%5c\ntoi", 'A', 'B');
-	//printf("salut%-10c\ncoucou%5c\ntoi", 'A', 'B');
-	ft_printf("%10.3s\n", "manuela");
-	   printf("%10.3s\n", "manuela");
-	//printf("%s\n", ft_uhex(-1 + 1 + 4294967295, 'x'));
-     return (0);
+	if (!s1 || !s2)
+		return (NULL);
+	if (!(s = (char *)malloc(sizeof(*s) * (ft_strlen(s1) + ft_strlen(s2) + 1))))
+		return (NULL);
+	i = -1;
+	while (s1[++i])
+		s[i] = s1[i];
+	j = -1;
+	while (s2[++j])
+		s[i + j] = s2[j];
+	s[i + j] = '\0';
+    free(s1);
+    free(s2);
+	return (s);
 }
+

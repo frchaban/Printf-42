@@ -46,24 +46,6 @@ char    *ft_offset_0(char *width, char *tmp)
     return (NULL);
 }
 
-
-char    *ft_display_char(t_format f, char c)
-{
-    char    *result;
-    char    *offset;
-
-    if (!(result = (char *)malloc(sizeof(*result)* 2)))
-        return (NULL);
-    result[0] = c;
-    result[1] = '\0';
-    if ((offset = ft_offset(f.width, result)))
-    {
-        result = (f.flag == '-' ? ft_strjoin(result, offset) : ft_strjoin(offset, result));
-        free(offset);
-    }   
-  return (result);
-}
-
 char    *ft_length(char *length, char *str)
 {
     char    *offset;
@@ -74,15 +56,27 @@ char    *ft_length(char *length, char *str)
     else 
         result = ft_substr(str, 0, ft_strlen(str));
     if ((offset = ft_offset_0(length, result)))
-    {
-        result = ft_strjoin(offset, result);
-        free(offset);
-    }
+        result = ft_strjoin_freed(offset, result);
     if (str[0] == '-')
-        result = ft_strjoin("-", result);
-    free (length);
-    free (str);
+        result = ft_strjoin_freed(ft_strdup("-"), result);
+    free(str);
     return (result);
+}
+
+char    *ft_display_char(t_format f, char c)
+{
+    char    *result;
+    char    *offset;
+
+    if (!(result = (char *)malloc(sizeof(*result)* 2)))
+        return (NULL);
+    result[0] = c;
+    result[1] = '\0';
+    if (f.conv == '%' && f.flag == '0')
+        result = ft_length(ft_itoa(ft_atoi(f.width)), result);
+    if ((offset = ft_offset(f.width, result)))
+        result = (f.flag == '-' ? ft_strjoin_freed(result, offset) : ft_strjoin_freed(offset, result));
+  return (result);
 }
 
 char    *ft_display_d_i(t_format f, char *str)
@@ -96,13 +90,12 @@ char    *ft_display_d_i(t_format f, char *str)
         if (ft_strcmp(str, "0") == 0 || ft_strcmp(str, "-0") == 0)
             return (result = ft_strdup(""));
     result = ft_length(f.precision, str);
-    if (!f.precision && f.flag == '0')
+    if (!f.precision && f.flag == '0' && result[0] == '-' && f.width)
+        result = ft_length(ft_itoa(ft_atoi(f.width) - 1), result);
+    else if (!f.precision && f.flag == '0' && f.width)
         result = ft_length(ft_itoa(ft_atoi(f.width)), result);
     else if  ((offset = ft_offset(f.width, result)))
-    {
-        result = (f.flag == '-' ? ft_strjoin(result, offset) : ft_strjoin(offset, result));
-        free(offset);
-    }
+        result = (f.flag == '-' ? ft_strjoin_freed(result, offset) : ft_strjoin_freed(offset, result));
     return(result);
 }
 
@@ -124,18 +117,19 @@ char    *ft_display_int(t_format f, int arg)
     return (NULL);
 }
 
-char    *ft_display_str(t_format f, const char *str)
+char    *ft_display_str(t_format f, char *str)
 {
     int     size;
     char    *result;
     char    *offset;
 
+    if (!str)
+        str = ft_strdup("(null)");
+    else if (ft_strcmp(str, "") == 0)
+        str = ft_strdup("");
     size = (f.precision ? ft_atoi(f.precision) : ft_strlen(str));
     result = ft_substr(str, 0, size);
     if ((offset = ft_offset(f.width, result)))
-    {
-         result = (f.flag == '-' ? ft_strjoin(result, offset) : ft_strjoin(offset, result));
-        free(offset);
-    }
+         result = (f.flag == '-' ? ft_strjoin_freed(result, offset) : ft_strjoin_freed(offset, result));
     return(result);
 }
