@@ -57,13 +57,11 @@ t_format	*ft_parsing(const char *fmt)
 		pos += f[i].offsetflag;
 		pos += ft_strlen(f[i].width);
 		if (fmt[pos] == '.' && fmt[pos])
-		{
 			pos += 1; /* pour le . */
-			if (f[i].precision)
-				pos += (f[i].precision ? ft_strlen(f[i].precision) : 0);
-			else
-				f[i].precision = ft_strdup("0");			
-		}
+		if (fmt[pos - 1] == '.' && !f[i].precision)
+			f[i].precision = ft_strdup("0");
+		else if (fmt[pos - 1] == '.' && f[i].precision)
+			pos += (f[i].precision ? ft_strlen(f[i].precision) : 0);
 		pos += 1; /* pour le conv */
 	}
 	return (f);

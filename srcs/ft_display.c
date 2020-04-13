@@ -39,7 +39,7 @@ char    *ft_display_d_i(t_format f, char *str)
     char    *offset;
 
     if (f.conv == 'p')
-        str = ft_strjoin("0x", str);
+        str = ft_strjoin_freed(ft_strdup("0x"), str);
     if (f.precision && ft_strcmp(f.precision, "0") == 0)
         if (ft_strcmp(str, "0") == 0 || ft_strcmp(str, "-0") == 0)
             return (result = ft_strdup(""));

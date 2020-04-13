@@ -96,7 +96,6 @@ int	ft_printf(const char *format, ...)
 	va_end(ap);
 	result = ft_print_result(f, (int)ft_count(format));
 	ft_format_free(f, ft_count(format));
-	//getchar();
 	return (result);
 }
 

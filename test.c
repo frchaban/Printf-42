@@ -20,8 +20,8 @@ int main(void)
 	//printf("%-10.5s\n", "Hello World");
 	//ft_printf("salut%-10c\ncoucou%5c\ntoi", 'A', 'B');
 	//printf("salut%-10c\ncoucou%5c\ntoi", 'A', 'B');
-	ft_printf("hello ca%----4c %1c va %10c%-c ??", '\0', '\n', (char)564, 0);
-	printf("hello ca%----4c %1c va %10c%-c ??", '\0', '\n', (char)564, 0);
+	ft_printf("%010.4d\n", 42);
+	printf("%010.4d\n", 42);
 	//printf("%s\n", ft_uhex(-1 + 1 + 4294967295, 'x'));
      return (0);
 }
