@@ -30,7 +30,7 @@ lib:
 	@make -C libft/ all 
 
 $(NAME): $(OBJS)
-	ar rcs $(NAME) $^ libft/*.o
+	ar rcs $(NAME) $^
 
 $(OBJS) : $(HEADERS)
 
