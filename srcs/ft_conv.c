@@ -23,8 +23,10 @@ unsigned int ft_count(const char *format)
 	{
 		if (format[i] == '%')
 		{
-			count++;
 			i++;
+			while (ft_isconv(format[i]) == 0 )
+				i++;
+			count++;
 		}
 		i++;
 	}

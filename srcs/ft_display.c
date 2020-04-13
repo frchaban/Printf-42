@@ -17,10 +17,15 @@ char    *ft_display_char(t_format f, char c)
     char    *result;
     char    *offset;
 
-    if (!(result = (char *)malloc(sizeof(*result)* 2)))
-        return (NULL);
-    result[0] = c;
-    result[1] = '\0';
+    if (c == 0)
+        result = ft_strdup("\0");
+    else
+    {
+       if (!(result = (char *)malloc(sizeof(*result)* 2)))
+            return (NULL);
+        result[0] = c;
+        result[1] = '\0';
+    }
     if (f.conv == '%' && f.flag == '0')
         result = ft_length(ft_itoa(ft_atoi(f.width)), result);
     if ((offset = ft_offset(f.width, result)))
@@ -35,7 +40,7 @@ char    *ft_display_d_i(t_format f, char *str)
 
     if (f.conv == 'p')
         str = ft_strjoin("0x", str);
-    if (f.precision && ft_atoi(f.precision) == 0)  
+    if (f.precision && ft_strcmp(f.precision, "0") == 0)
         if (ft_strcmp(str, "0") == 0 || ft_strcmp(str, "-0") == 0)
             return (result = ft_strdup(""));
     result = ft_length(f.precision, str);

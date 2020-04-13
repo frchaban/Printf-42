@@ -38,6 +38,7 @@ typedef	struct 	s_format
 	char		conv;
 	char		*result;
 }				t_format;
+
 t_format		*ft_parsing(const char *fmt);
 char    		*ft_display_str(t_format f, char *str);
 char    	*ft_display_int(t_format f, int arg);

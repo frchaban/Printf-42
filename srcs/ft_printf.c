@@ -49,7 +49,10 @@ int	ft_print_result(t_format *f, int size)
 		if (f[i].result)
 		{
 			ft_putstr(f[i].result);
-			result += ft_strlen(f[i].result);
+			if (f[i].conv == 'c' && ft_strlen(f[i].result) == 0)
+				result +=1;
+			else
+				result += ft_strlen(f[i].result);
 		}
 	}
 	return (result);
@@ -58,7 +61,7 @@ int	ft_print_result(t_format *f, int size)
 void	ft_format_free(t_format *f, unsigned int size)
 {
 	unsigned int i;
-
+	
 	i = 0;
 	while (i < size)
 	{

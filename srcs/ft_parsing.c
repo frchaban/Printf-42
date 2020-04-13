@@ -16,6 +16,8 @@ t_format	ft_format_parsing(const char *fmt, unsigned int pos)
 {
 	t_format	f;
 
+	f.conv = 0;
+	f.flag = 0;
 	f.before = ft_format_before(fmt, pos);
 	pos = pos + ft_strlen(f.before) + 1;
 	if (pos >= ft_strlen(fmt))
@@ -57,7 +59,10 @@ t_format	*ft_parsing(const char *fmt)
 		if (fmt[pos] == '.' && fmt[pos])
 		{
 			pos += 1; /* pour le . */
-			pos += (f[i].precision ? ft_strlen(f[i].precision) : 0);
+			if (f[i].precision)
+				pos += (f[i].precision ? ft_strlen(f[i].precision) : 0);
+			else
+				f[i].precision = ft_strdup("0");			
 		}
 		pos += 1; /* pour le conv */
 	}
