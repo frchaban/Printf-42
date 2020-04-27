@@ -6,13 +6,13 @@
 /*   By: Francois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 20:05:06 by Francois          #+#    #+#             */
-/*   Updated: 2020/03/12 20:07:25 by Francois         ###   ########.fr       */
+/*   Updated: 2020/04/27 17:18:08 by frchaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t ft_strlcpy(char *dst, const char *src, size_t dstsize)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	unsigned int i;
 	unsigned int count;

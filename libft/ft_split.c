@@ -6,7 +6,7 @@
 /*   By: Francois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 19:35:10 by Francois          #+#    #+#             */
-/*   Updated: 2020/03/12 19:38:42 by Francois         ###   ########.fr       */
+/*   Updated: 2020/04/27 16:55:44 by frchaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ static size_t	ft_len(char const *s, char c)
 
 	cpt = 0;
 	i = 0;
-	while(s[i])
+	while (s[i])
 	{
 		if (s[i] != c)
-		{	
+		{
 			len = ft_wordlen(s, i, c);
 			cpt++;
 			i = i + len;
@@ -50,15 +50,17 @@ char			**ft_split(char const *s, char c)
 	char			**split;
 	unsigned int	i;
 	size_t			len;
-	
-	if (!s || !(split = (char **)malloc(sizeof(*split) * (ft_len(s, c) + 1))))
-		return (NULL);	
+
+	if (s == NULL)
+		return (NULL);
+	if (!(split = (char **)malloc(sizeof(*split) * (ft_len(s, c) + 1))))
+		return (NULL);
 	cpt = 0;
 	i = 0;
-	while(s[i])
+	while (s[i])
 	{
 		if (s[i] != c)
-		{	
+		{
 			len = ft_wordlen(s, i, c);
 			split[cpt] = ft_substr(s, i, len);
 			cpt++;

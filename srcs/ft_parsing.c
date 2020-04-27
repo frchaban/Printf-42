@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: frchaban <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/28 15:27:55 by frchaban          #+#    #+#             */
-/*   Updated: 2020/03/31 21:09:21 by frchaban         ###   ########.fr       */
+/*   Created: 2020/04/27 18:41:47 by frchaban          #+#    #+#             */
+/*   Updated: 2020/04/27 18:42:21 by frchaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_format	ft_format_parsing(const char *fmt, unsigned int pos)
 	f.before = ft_format_before(fmt, pos);
 	pos = pos + ft_strlen(f.before) + 1;
 	if (pos >= ft_strlen(fmt))
-		return (f); 
+		return (f);
 	f = ft_format_flag(f, fmt, pos);
 	pos = pos + f.offsetflag;
 	f.width = ft_format_width(fmt, pos);
@@ -53,16 +53,16 @@ t_format	*ft_parsing(const char *fmt)
 	{
 		f[i] = ft_format_parsing(fmt, pos);
 		pos += ft_strlen(f[i].before);
-		pos += 1; /* pour le % */
+		pos += 1;
 		pos += f[i].offsetflag;
 		pos += ft_strlen(f[i].width);
 		if (fmt[pos] == '.' && fmt[pos])
-			pos += 1; /* pour le . */
+			pos += 1;
 		if (fmt[pos - 1] == '.' && !f[i].precision)
 			f[i].precision = ft_strdup("0");
 		else if (fmt[pos - 1] == '.' && f[i].precision)
 			pos += (f[i].precision ? ft_strlen(f[i].precision) : 0);
-		pos += 1; /* pour le conv */
+		pos += 1;
 	}
 	return (f);
 }

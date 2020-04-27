@@ -6,7 +6,7 @@
 /*   By: Francois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 19:33:21 by Francois          #+#    #+#             */
-/*   Updated: 2020/03/11 19:37:06 by Francois         ###   ########.fr       */
+/*   Updated: 2020/04/27 16:51:03 by frchaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strcpy(char *dst, const char *src)
 	{
 		dst[i] = src[i];
 		i++;
-	}	
+	}
 	dst[i] = '\0';
 	return (dst);
 }

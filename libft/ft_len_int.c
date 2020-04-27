@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_hex_US.c                                 :+:      :+:    :+:   */
+/*   ft_len_int.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frchaban <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/31 16:13:10 by frchaban          #+#    #+#             */
-/*   Updated: 2020/03/31 16:21:45 by frchaban         ###   ########.fr       */
+/*   Created: 2020/04/17 21:03:44 by frchaban          #+#    #+#             */
+/*   Updated: 2020/04/27 17:17:50 by frchaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr_hex_US(unsigned int nbr, int flag)
+int	ft_len_int(int n)
 {
-	unsigned long	nb;
-	char			*base;
+	int size;
 
-	if (flag == 2)
-		base = ft_strdup("0123456789ABCDEF");
-	else
-		base = ft_strdup("0123456789abcdef");
-	nb = nbr;
-	if (nb >= ft_strlen(base))
+	if (n < 0)
 	{
-		ft_putnbr_hex_US(nb / ft_strlen(base), flag);
-		ft_putnbr_hex_US(nb % ft_strlen(base), flag);
+		n = n * -1;
+		size = 1;
 	}
 	else
+		size = 0;
+	if (n == 0)
+		return (1);
+	while (n > 0)
 	{
-		ft_putchar(base[nb]);
+		size++;
+		n = n / 10;
 	}
-	free (base);
+	return (size);
 }

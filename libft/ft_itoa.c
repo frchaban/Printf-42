@@ -6,16 +6,16 @@
 /*   By: Francois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 15:01:27 by Francois          #+#    #+#             */
-/*   Updated: 2020/03/11 16:01:57 by Francois         ###   ########.fr       */
+/*   Updated: 2020/04/27 16:48:12 by frchaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t		ft_len(long nb)
+static size_t	ft_len(long nb)
 {
 	size_t	neg;
-	
+
 	neg = 0;
 	if (nb < 0)
 	{
@@ -29,7 +29,7 @@ static size_t		ft_len(long nb)
 	return (1 + neg + ft_len(nb));
 }
 
-char				*ft_itoa(int n)
+char			*ft_itoa(int n)
 {
 	char			*s;
 	unsigned int	i;

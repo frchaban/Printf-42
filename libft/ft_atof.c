@@ -1,39 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atof.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Francois <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: frchaban <frchaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/11 16:53:36 by Francois          #+#    #+#             */
-/*   Updated: 2020/03/31 20:41:33 by frchaban         ###   ########.fr       */
+/*   Created: 2020/04/17 20:53:38 by frchaban          #+#    #+#             */
+/*   Updated: 2020/04/27 13:57:56 by frchaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+float	ft_atof(const char *str)
 {
-	int				res;
-	unsigned int	i;
-	int				neg;
+	int		atoi;
+	float	atof;
+	int		fac;
+	int		i;
 
-	res = 0;
+	fac = 1;
 	i = 0;
-	neg = 1;
+	atof = 0;
 	while (str[i] && (str[i] == 32 || (str[i] >= 9 && str[i] <= 13)))
 		i++;
-	if (str[i] && (str[i] == 43 || str[i] == 45))
-	{
-		if (str[i] == 45)
-			neg = -1;
+	atoi = ft_atoi(str);
+	i += ft_len_int(atoi);
+	if (str[i] == '.')
 		i++;
-	}
+	else
+		return (atoi);
 	while (str[i] && ft_isdigit(str[i]))
-		res = res * 10 + (str[i++] - 48);
-	if (res < 0 && neg > 0)
-		return (-1);
-	else if (res < 0 && neg < 0 && res * neg != -2147483648)
-		return (0);
-	return (res * neg);
+	{
+		fac *= 10;
+		atof = atof * 10 + (str[i++] - 48);
+	}
+	if (atoi < 0)
+		return (atoi - atof / fac);
+	return (atoi + atof / fac);
 }

@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_free2dim.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frchaban <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: frchaban <frchaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/18 12:39:17 by frchaban          #+#    #+#             */
-/*   Updated: 2020/04/27 17:22:58 by frchaban         ###   ########.fr       */
+/*   Created: 2020/04/16 14:07:36 by frchaban          #+#    #+#             */
+/*   Updated: 2020/04/27 16:46:00 by frchaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+void	ft_free_2dim(char **data)
 {
-	t_list *begin;
-	t_list *tmp;
+	int i;
 
-	if (!lst)
-		return ;
-	begin = *lst;
-	while (begin)
-	{
-		(*del)(begin->content);
-		tmp = begin;
-		begin = begin->next;
-		free(tmp);
-	}
-	*lst = NULL;
+	i = -1;
+	while (data[++i])
+		free(data[i]);
+	free(data);
 }

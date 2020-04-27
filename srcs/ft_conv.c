@@ -6,16 +6,16 @@
 /*   By: frchaban <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/19 16:49:19 by frchaban          #+#    #+#             */
-/*   Updated: 2020/03/28 16:50:29 by frchaban         ###   ########.fr       */
+/*   Updated: 2020/04/27 18:27:36 by frchaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-unsigned int ft_count(const char *format)
+unsigned int	ft_count(const char *format)
 {
-	unsigned int i;
-	unsigned int count;
+	unsigned int	i;
+	unsigned int	count;
 
 	i = 0;
 	count = 0;
@@ -24,7 +24,7 @@ unsigned int ft_count(const char *format)
 		if (format[i] == '%')
 		{
 			i++;
-			while (ft_isconv(format[i]) == 0 )
+			while (ft_isconv(format[i]) == 0)
 				i++;
 			count++;
 		}
@@ -33,10 +33,10 @@ unsigned int ft_count(const char *format)
 	return (count);
 }
 
-int	ft_isconv(char c)
+int				ft_isconv(char c)
 {
-	unsigned int i;
-	
+	unsigned int	i;
+
 	i = 0;
 	while (CONV[i])
 	{
@@ -47,10 +47,10 @@ int	ft_isconv(char c)
 	return (0);
 }
 
-int	ft_isflag(char c)
+int				ft_isflag(char c)
 {
-	unsigned int i;
-	
+	unsigned int	i;
+
 	i = 0;
 	while (FLAG[i])
 	{

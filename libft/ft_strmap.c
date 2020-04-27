@@ -6,7 +6,7 @@
 /*   By: Francois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 13:51:01 by Francois          #+#    #+#             */
-/*   Updated: 2020/03/11 14:04:39 by Francois         ###   ########.fr       */
+/*   Updated: 2020/04/27 16:52:58 by frchaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_strmap(char const *s, char (*f)(char))
 	i = 0;
 	while (s[i])
 	{
-		str[i] = (*f)(s[i]);	
+		str[i] = (*f)(s[i]);
 		i++;
 	}
 	str[ft_strlen(s)] = '\0';

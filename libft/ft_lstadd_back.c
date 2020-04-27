@@ -6,13 +6,13 @@
 /*   By: frchaban <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/16 18:13:55 by frchaban          #+#    #+#             */
-/*   Updated: 2020/03/16 18:43:11 by frchaban         ###   ########.fr       */
+/*   Updated: 2020/04/27 17:13:58 by frchaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_lstadd_back(t_list **alst, t_list *new)
+void	ft_lstadd_back(t_list **alst, t_list *new)
 {
 	t_list *begin;
 

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atoi_freed.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Francois <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: frchaban <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/11 16:53:36 by Francois          #+#    #+#             */
-/*   Updated: 2020/03/31 20:41:33 by frchaban         ###   ########.fr       */
+/*   Created: 2020/04/16 15:00:34 by frchaban          #+#    #+#             */
+/*   Updated: 2020/04/27 13:59:06 by frchaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+int	ft_atoi_freed(char *str)
 {
 	int				res;
 	unsigned int	i;
@@ -35,5 +35,6 @@ int	ft_atoi(const char *str)
 		return (-1);
 	else if (res < 0 && neg < 0 && res * neg != -2147483648)
 		return (0);
+	free(str);
 	return (res * neg);
 }

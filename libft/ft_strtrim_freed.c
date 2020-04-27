@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_strtrim_freed.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Francois <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: frchaban <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/11 14:28:33 by Francois          #+#    #+#             */
-/*   Updated: 2020/04/27 16:50:26 by frchaban         ###   ########.fr       */
+/*   Created: 2020/04/16 13:42:04 by frchaban          #+#    #+#             */
+/*   Updated: 2020/04/27 17:25:40 by frchaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static	int	ft_occ(char const *set, char c)
+static int		ft_occ(char const *set, char c)
 {
 	unsigned int	i;
 
@@ -26,7 +26,7 @@ static	int	ft_occ(char const *set, char c)
 	return (0);
 }
 
-char		*ft_strtrim(char const *s, char const *set)
+char			*ft_strtrim_freed(char *s, char const *set)
 {
 	char			*trim;
 	int				start;
@@ -49,5 +49,6 @@ char		*ft_strtrim(char const *s, char const *set)
 			return (NULL);
 		trim[0] = '\0';
 	}
+	free(s);
 	return (trim);
 }

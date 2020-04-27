@@ -6,7 +6,7 @@
 #    By: frchaban <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/03 18:24:04 by frchaban          #+#    #+#              #
-#    Updated: 2020/03/31 21:10:04 by frchaban         ###   ########.fr        #
+#    Updated: 2020/04/27 18:51:12 by frchaban         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,9 +39,11 @@ $(OBJS) : $(HEADERS)
 
 clean:
 			rm -f $(OBJS)
+			@make -C libft/ clean
 
 fclean: clean
 			rm -f  $(NAME)
+			@make -C libft/ fclean
 
 re: fclean all
 
