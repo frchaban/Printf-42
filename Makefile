@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: frchaban <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: frchaban <frchaban@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/03 18:24:04 by frchaban          #+#    #+#              #
-#    Updated: 2020/04/27 18:51:12 by frchaban         ###   ########.fr        #
+#    Updated: 2020/04/29 14:23:40 by frchaban         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ INCLUDES = -I./includes
 all:	lib $(NAME)
 
 lib:
-	@make -C libft/ all 
+	@make -C libft/ all
 
 $(NAME): $(OBJS)
 	ar rcs $(NAME) $^
@@ -35,7 +35,7 @@ $(NAME): $(OBJS)
 $(OBJS) : $(HEADERS)
 
 %.o: %.c
-	$(CC) $(FLAGS) -c $< $(INCLUDES) -o $@ 
+	$(CC) $(FLAGS) -c $< $(INCLUDES) -o $@
 
 clean:
 			rm -f $(OBJS)

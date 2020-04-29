@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libftprintf.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frchaban <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: frchaban <frchaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/19 16:34:45 by frchaban          #+#    #+#             */
-/*   Updated: 2020/04/27 18:24:32 by frchaban         ###   ########.fr       */
+/*   Updated: 2020/04/29 12:49:52 by frchaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,14 @@ typedef	struct	s_format
 	char		*precision;
 	char		conv;
 	char		*result;
+	int			excp;
 }				t_format;
 
 t_format		*ft_parsing(const char *fmt);
 char			*ft_display_str(t_format f, char *str);
-char			*ft_display_int(t_format f, int arg);
+char			*ft_display_int(t_format *f, int arg);
 char			*ft_display_mem(t_format f, long arg);
-char			*ft_display_char(t_format f, char c);
+char			*ft_display_char(t_format *f, char c);
 char			*ft_format_width(const char *fmt, unsigned int pos);
 char			*ft_format_precision(const char *fmt, unsigned int pos);
 char			*ft_format_before(const char *fmt, unsigned int pos);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frchaban <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: frchaban <frchaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/19 15:41:28 by frchaban          #+#    #+#             */
-/*   Updated: 2020/04/27 18:47:33 by frchaban         ###   ########.fr       */
+/*   Updated: 2020/04/29 13:20:33 by frchaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,29 @@
 
 t_format		ft_format_result(va_list ap, t_format f)
 {
+	int star;
+
 	f.result = NULL;
 	if (f.width && ft_strcmp(f.width, "*") == 0)
-		f.width = ft_itoa(va_arg(ap, int));
+	{
+		star = va_arg(ap, int);
+		f.flag = (star >= 0 ? f.flag : '-');
+		f.width = (star >= 0 ? ft_itoa(star) : ft_itoa(star * -1));
+	}
 	if (f.precision && ft_strcmp(f.precision, "*") == 0)
-		f.precision = ft_itoa(va_arg(ap, int));
+	{
+		star = va_arg(ap, int);
+		f.precision = (star >= 0 ? ft_itoa(star) : NULL);
+	}
 	if (f.conv == 'd' || f.conv == 'i' || f.conv == 'x'
 		|| f.conv == 'X' || f.conv == 'c' || f.conv == 'u')
-		f.result = ft_display_int(f, va_arg(ap, int));
+		f.result = ft_display_int(&f, va_arg(ap, int));
 	else if (f.conv == 'p')
 		f.result = ft_display_mem(f, (long)va_arg(ap, void *));
 	else if (f.conv == 's')
 		f.result = ft_display_str(f, va_arg(ap, char *));
 	else if (f.conv == '%')
-		f.result = ft_display_char(f, '%');
+		f.result = ft_display_char(&f, '%');
 	return (f);
 }
 
@@ -42,18 +51,18 @@ int				ft_print_result(t_format *f, int size)
 	while (++i <= size)
 	{
 		if (f[i].before)
-		{
 			ft_putstr(f[i].before);
-			result += ft_strlen(f[i].before);
-		}
 		if (f[i].result)
 		{
+			if (f[i].excp == 2)
+				ft_putchar(0);
 			ft_putstr(f[i].result);
-			if (f[i].conv == 'c' && ft_strlen(f[i].result) == 0)
-				result += 1;
-			else
-				result += ft_strlen(f[i].result);
+			if (f[i].excp == 3)
+				ft_putchar(0);
+			result += ((f[i].excp == 2 || f[i].excp == 3) ? 1 : 0);
 		}
+		result += ft_strlen(f[i].result);
+		result += ft_strlen(f[i].before);
 	}
 	return (result);
 }
