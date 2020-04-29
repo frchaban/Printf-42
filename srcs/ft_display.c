@@ -6,7 +6,7 @@
 /*   By: frchaban <frchaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/27 18:38:23 by frchaban          #+#    #+#             */
-/*   Updated: 2020/04/29 14:21:30 by frchaban         ###   ########.fr       */
+/*   Updated: 2020/04/29 16:45:15 by frchaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,11 @@ char	*ft_display_d_i(t_format f, char *str)
 	{
 		if (ft_strcmp(str, "0") == 0 || ft_strcmp(str, "-0") == 0)
 		{
-			result = ft_strdup("");
-			result = ft_length(f.precision, result);
 			free(str);
+			str = ft_strdup("");
 		}
 	}
-	else
-		result = ft_length(f.precision, str);
+	result = ft_length(f.precision, str);
 	if (!f.precision && f.flag == '0' && result[0] == '-' && f.width)
 		result = ft_length(ft_itoa(ft_atoi(f.width) - 1), result);
 	else if (!f.precision && f.flag == '0' && f.width)
