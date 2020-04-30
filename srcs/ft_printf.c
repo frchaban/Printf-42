@@ -6,7 +6,7 @@
 /*   By: frchaban <frchaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/19 15:41:28 by frchaban          #+#    #+#             */
-/*   Updated: 2020/04/29 16:57:09 by frchaban         ###   ########.fr       */
+/*   Updated: 2020/04/30 11:33:31 by frchaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int				ft_printf(const char *format, ...)
 	int			result;
 
 	if (format == NULL)
-		return(-1);
+		return (-1);
 	f = ft_parsing(format);
 	va_start(ap, format);
 	i = -1;
