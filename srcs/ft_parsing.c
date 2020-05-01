@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frchaban <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: frchaban <frchaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/27 18:41:47 by frchaban          #+#    #+#             */
-/*   Updated: 2020/04/27 18:42:21 by frchaban         ###   ########.fr       */
+/*   Updated: 2020/05/01 14:17:40 by frchaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_format	ft_format_parsing(const char *fmt, unsigned int pos)
 
 	f.conv = 0;
 	f.flag = 0;
+	f.excp = 0;
 	f.before = ft_format_before(fmt, pos);
 	pos = pos + ft_strlen(f.before) + 1;
 	if (pos >= ft_strlen(fmt))
@@ -52,10 +53,10 @@ t_format	*ft_parsing(const char *fmt)
 	while (++i <= (int)ft_count(fmt))
 	{
 		f[i] = ft_format_parsing(fmt, pos);
-		pos += ft_strlen(f[i].before);
-		pos += 1;
-		pos += f[i].offsetflag;
-		pos += ft_strlen(f[i].width);
+		pos += ft_strlen(f[i].before) + 1;
+		if (pos >= ft_strlen(fmt))
+			break ;
+		pos = pos + f[i].offsetflag + ft_strlen(f[i].width);
 		if (fmt[pos] == '.' && fmt[pos])
 			pos += 1;
 		if (fmt[pos - 1] == '.' && !f[i].precision)

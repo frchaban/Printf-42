@@ -6,7 +6,7 @@
 /*   By: frchaban <frchaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/27 18:38:23 by frchaban          #+#    #+#             */
-/*   Updated: 2020/05/01 10:02:55 by frchaban         ###   ########.fr       */
+/*   Updated: 2020/05/01 14:17:55 by frchaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_display_char(t_format *f, char c)
 	if (f->width != NULL)
 		f->width = ft_itoa(ft_atoi(f->width) - excp);
 	if (f->conv == '%' && f->flag == '0' && f->width)
-		result = ft_length(ft_itoa(ft_atoi(f->width)), result);
+		result = ft_length(ft_itoa(ft_atoi(f->width)), result, 1);
 	if ((offset = ft_offset(f->width, result)))
 		result = (f->flag == '-' ? ft_strjoin_freed(result, offset) :
 				ft_strjoin_freed(offset, result));
@@ -52,11 +52,11 @@ char	*ft_display_d_i(t_format f, char *str)
 			str = ft_strdup("");
 		}
 	}
-	result = ft_length(f.precision, str);
+	result = ft_length(f.precision, str, 0);
 	if (!f.precision && f.flag == '0' && result[0] == '-' && f.width)
-		result = ft_length(ft_itoa(ft_atoi(f.width) - 1), result);
+		result = ft_length(ft_itoa(ft_atoi(f.width) - 1), result, 1);
 	else if (!f.precision && f.flag == '0' && f.width)
-		result = ft_length(ft_itoa(ft_atoi(f.width)), result);
+		result = ft_length(f.width, result, 0);
 	else if ((offset = ft_offset(f.width, result)))
 		result = (f.flag == '-' ? ft_strjoin_freed(result, offset) :
 				ft_strjoin_freed(offset, result));
@@ -93,13 +93,23 @@ char	*ft_display_str(t_format f, char *str)
 	int		size;
 	char	*result;
 	char	*offset;
+	int		flag;
 
+	flag = 0;
 	if (!str)
+	{
 		str = ft_strdup("(null)");
+		flag = 1;
+	}
 	else if (ft_strcmp(str, "") == 0)
+	{
 		str = ft_strdup("");
+		flag = 1;
+	}
 	size = (f.precision ? ft_atoi(f.precision) : ft_strlen(str));
 	result = ft_substr(str, 0, size);
+	if (flag == 1)
+		free(str);
 	if ((offset = ft_offset(f.width, result)))
 		result = (f.flag == '-' ? ft_strjoin_freed(result, offset) :
 				ft_strjoin_freed(offset, result));

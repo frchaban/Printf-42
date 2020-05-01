@@ -6,7 +6,7 @@
 /*   By: frchaban <frchaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 18:26:50 by frchaban          #+#    #+#             */
-/*   Updated: 2020/04/27 17:12:07 by frchaban         ###   ########.fr       */
+/*   Updated: 2020/05/01 11:44:46 by frchaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int					ft_strequ(char const *s1, char const *s2);
 int					ft_strnequ(char const *s1, char const *s2, size_t n);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
+char				*ft_strdup_free(char *s1);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strjoin_freed(char *s1, char *s2);
 char				*ft_strjoin_s1_freed(char *s1, char *s2);

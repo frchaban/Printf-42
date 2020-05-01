@@ -6,7 +6,7 @@
 /*   By: frchaban <frchaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/27 18:36:49 by frchaban          #+#    #+#             */
-/*   Updated: 2020/05/01 09:57:10 by frchaban         ###   ########.fr       */
+/*   Updated: 2020/05/01 12:36:28 by frchaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*ft_offset_0(char *width, char *tmp)
 	return (NULL);
 }
 
-char	*ft_length(char *length, char *str)
+char	*ft_length(char *length, char *str, int free_length)
 {
 	char	*offset;
 	char	*result;
@@ -60,5 +60,7 @@ char	*ft_length(char *length, char *str)
 	if (str[0] == '-')
 		result = ft_strjoin_freed(ft_strdup("-"), result);
 	free(str);
+	if (free_length == 1)
+		free(length);
 	return (result);
 }

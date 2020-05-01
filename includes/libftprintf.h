@@ -6,7 +6,7 @@
 /*   By: frchaban <frchaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/19 16:34:45 by frchaban          #+#    #+#             */
-/*   Updated: 2020/05/01 09:57:19 by frchaban         ###   ########.fr       */
+/*   Updated: 2020/05/01 14:18:06 by frchaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 # include <stdlib.h>
 # include <stdarg.h>
 # include "../libft/libft.h"
-
-# include <stdio.h>
 
 unsigned int	ft_count(const char *format);
 int				ft_isconv(char c);
@@ -50,6 +48,6 @@ char			*ft_format_before(const char *fmt, unsigned int pos);
 t_format		ft_format_flag(t_format f, const char *fmt, unsigned int pos);
 char			*ft_offset(char *width, char *tmp);
 char			*ft_offset_0(char *width, char *tmp);
-char			*ft_length(char *length, char *str);
+char			*ft_length(char *length, char *str, int free_length);
 char			*ft_display_d_i(t_format f, char *str);
 #endif

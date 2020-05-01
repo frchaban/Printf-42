@@ -6,11 +6,18 @@
 /*   By: frchaban <frchaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/19 15:41:28 by frchaban          #+#    #+#             */
-/*   Updated: 2020/05/01 10:02:57 by frchaban         ###   ########.fr       */
+/*   Updated: 2020/05/01 14:17:08 by frchaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
+
+int				ft_test_conv(char c)
+{
+	if (c == 'd' || c == 'i' || c == 'x' || c == 'X' || c == 'c' || c == 'u')
+		return (1);
+	return (0);
+}
 
 t_format		ft_format_result(va_list ap, t_format f)
 {
@@ -21,15 +28,16 @@ t_format		ft_format_result(va_list ap, t_format f)
 	{
 		star = va_arg(ap, int);
 		f.flag = (star >= 0 ? f.flag : '-');
+		free(f.width);
 		f.width = (star >= 0 ? ft_itoa(star) : ft_itoa(star * -1));
 	}
 	if (f.precision && ft_strcmp(f.precision, "*") == 0)
 	{
 		star = va_arg(ap, int);
+		free(f.precision);
 		f.precision = (star >= 0 ? ft_itoa(star) : NULL);
 	}
-	if (f.conv == 'd' || f.conv == 'i' || f.conv == 'x'
-		|| f.conv == 'X' || f.conv == 'c' || f.conv == 'u')
+	if (ft_test_conv(f.conv) == 1)
 		f.result = ft_display_int(&f, va_arg(ap, int));
 	else if (f.conv == 'p')
 		f.result = ft_display_mem(f, (long)va_arg(ap, void *));
