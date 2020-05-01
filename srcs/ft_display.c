@@ -6,7 +6,7 @@
 /*   By: frchaban <frchaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/27 18:38:23 by frchaban          #+#    #+#             */
-/*   Updated: 2020/04/29 16:45:15 by frchaban         ###   ########.fr       */
+/*   Updated: 2020/05/01 10:02:55 by frchaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*ft_display_char(t_format *f, char c)
 	result[1] = '\0';
 	if (f->width != NULL)
 		f->width = ft_itoa(ft_atoi(f->width) - excp);
-	if (f->conv == '%' && f->flag == '0')
+	if (f->conv == '%' && f->flag == '0' && f->width)
 		result = ft_length(ft_itoa(ft_atoi(f->width)), result);
 	if ((offset = ft_offset(f->width, result)))
 		result = (f->flag == '-' ? ft_strjoin_freed(result, offset) :
