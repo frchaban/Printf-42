@@ -6,11 +6,12 @@
 /*   By: frchaban <frchaban@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/19 15:41:28 by frchaban          #+#    #+#             */
-/*   Updated: 2020/05/01 14:17:08 by frchaban         ###   ########.fr       */
+/*   Updated: 2020/05/01 17:52:23 by frchaban         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
+#include <stdio.h>
 
 int				ft_test_conv(char c)
 {
@@ -105,7 +106,7 @@ int				ft_printf(const char *format, ...)
 	t_format	*f;
 	int			result;
 
-	if (format == NULL)
+	if (format == NULL || (format[0] == '%' && ft_strlen(format) == 1))
 		return (-1);
 	f = ft_parsing(format);
 	va_start(ap, format);
